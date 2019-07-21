@@ -14,9 +14,9 @@
     <name>spring5-recipe-app</name>
     <description>spring5 recipe web app step by step</description>
 
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+<!--    <properties>-->
+<!--        <java.version>1.8</java.version>-->
+<!--    </properties>-->
 
     <dependencies>
         <dependency>
