@@ -23,9 +23,16 @@ public class CategoryTest {
 
     @Test
     public void getDescription() {
+        String descriptions = "American";
+        category.setDescription(descriptions);
+        assertEquals(descriptions, category.getDescription());
     }
 
     @Test
     public void getRecipes() {
+        Recipe recipe = new Recipe();
+        recipe.getCategories().add(category);
+        assertEquals(category, recipe.getCategories().stream().findFirst().get());
     }
+
 }
