@@ -10,7 +10,10 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -210,6 +213,22 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         tacosRecipe.setSource("Simply Recipes");
 
         recipes.add(tacosRecipe);
+
+        // set initial images
+        try {
+            File image = new File("src/main/resources/static/images/guacamole400x400WithX.jpg");
+            byte[] bytes = new byte[0];
+            bytes = Files.readAllBytes(image.toPath());
+            Byte[] bytesBoxed = new Byte[bytes.length];
+            int i = 0;
+            for (byte primByte : bytes) {
+                bytesBoxed[i++] = primByte;
+            }
+            guacRecipe.setImage(bytesBoxed);
+            tacosRecipe.setImage(bytesBoxed);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         System.out.println("added two recipes on startup");
         return recipes;
