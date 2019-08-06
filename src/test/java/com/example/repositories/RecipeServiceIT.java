@@ -35,7 +35,6 @@ public class RecipeServiceIT {
     @Transactional
     @Test
     public void testSaveDescription() throws Exception {
-
         // given
         Iterable<Recipe> recipes = recipeRepository.findAll();
         Recipe testRecipe = recipes.iterator().next();

@@ -49,9 +49,10 @@ public class ImageController {
             int i = 0;
 
             for (Byte wrappedByte : recipeCommand.getImage()) {
-                byteArray[i++] = wrappedByte; //auto unboxing
+                byteArray[i++] = wrappedByte;
             }
 
+            // get image byte array and copy to response
             response.setContentType("image/jpeg");
             InputStream is = new ByteArrayInputStream(byteArray);
             IOUtils.copy(is, response.getOutputStream());
