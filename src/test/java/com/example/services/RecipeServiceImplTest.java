@@ -4,6 +4,7 @@ import com.example.commands.RecipeCommand;
 import com.example.converters.RecipeCommandToRecipe;
 import com.example.converters.RecipeToRecipeCommand;
 import com.example.domain.Recipe;
+import com.example.exceptions.NotFoundException;
 import com.example.repositories.RecipeRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,6 +64,16 @@ public class RecipeServiceImplTest {
         assertNotNull("Null recipe returned", recipeReturned);
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, never()).findAll();
+    }
+
+    @Test(expected = NotFoundException.class) // should get back exception
+    public void getRecipeByIdNotFoundTest() throws Exception {
+
+        Optional<Recipe> recipeOptional = Optional.empty();
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        Recipe recipeReturned = recipeService.findById(1L);
     }
 
     @Test
